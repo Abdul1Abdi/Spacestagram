@@ -28,7 +28,7 @@ function App() {
       params: {
         start_date: "2021-01-01",
         end_date: "2021-01-19",
-        api_key: process.env.REACT_APP_API_KEY //Using a hidden file to hide API key, not a perfect way but I want to learn more back-end to find a securer way to store APIs
+        api_key: "ZJR60oMxAe8iWaxaVWxEj4G2hbqa4aO13p5njp1B" 
       }
     }).catch(error => {
       setErrorMessage("Sorry there was an error getting data from the API");
