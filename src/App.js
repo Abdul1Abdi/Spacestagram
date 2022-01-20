@@ -9,7 +9,7 @@ function App() {
   // This gets us the current date, new Date format doesn't match so toISOString gives us the correct date info but with extra info at the end. This splits off the info we need
   currentDate = currentDate.toISOString().split("T")[0];
 
-  const [startDate, setStartDate] = useState("2021-01-01");
+  const [startDate, setStartDate] = useState("2022-01-01");
   const [endDate, setEndDate] = useState(currentDate);
   const [submit, setSubmit] = useState(false);
   const [photos, setPhotos] = useState([]);
@@ -26,8 +26,8 @@ function App() {
       method: "GET",
       dataResponse: "json",
       params: {
-        start_date: "2021-01-01",
-        end_date: "2021-01-19",
+        start_date: startDate,
+        end_date: endDate,
         api_key: "ZJR60oMxAe8iWaxaVWxEj4G2hbqa4aO13p5njp1B" 
       }
     }).catch(error => {
@@ -101,7 +101,7 @@ function App() {
       </main>
       <footer>
         <div className="wrapper">
-          <p>Made by <a href="https://github.com/Abdul1Abdi" target="_blank">Abdul</a></p>
+          <p>Made by <a href="https://github.com/Abdul1Abdi" target="_blank" rel="noopener noreferrer">Abdul</a></p>
         </div>
       </footer>
     </div>

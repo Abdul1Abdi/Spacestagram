@@ -15,7 +15,7 @@ const DisplayPhotos = ({photos, likeToggle}) => {
                     return(
                         // Since there is only 1 photo per day the date can serve as a unique ID
                         <li key={photo.date}>
-                            <img src={photo.url} alt={`A photo of ${photo.title}`}/>
+                            <img src={photo.url} alt={photo.title}/>
                             <div className="textContainer">
                                 <h3>{photo.title}</h3>
                                 <p>{photo.explanation}</p>
