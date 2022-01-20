@@ -1,10 +1,13 @@
 
-const DisplayPhotos = ({photos}) => {
-    console.log(photos)
+const DisplayPhotos = ({photos, likeToggle}) => {
     return(
         <ul>
             {
-                photos.map(photo => {
+                photos.map((photo, index) => {
+                    // Changes class name depending on whether the photo is licked or not. 
+                    // This is changed using the likeToggle
+                    const likeClass = photo.liked ? "liked" : "unliked"
+
                     return(
                         // Since there is only 1 photo per day the date can serve as a unique ID
                         <li key={photo.date}>
@@ -16,7 +19,7 @@ const DisplayPhotos = ({photos}) => {
                                     <p>{photo.copyright}</p>
                                     <p>{photo.date}</p>
                                 </div>
-                                <button>Like</button>
+                                <button className={ likeClass } onClick={ () => likeToggle(index) }>Like</button>
                             </div>
                             
                         </li>

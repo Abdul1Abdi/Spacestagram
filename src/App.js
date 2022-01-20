@@ -8,18 +8,24 @@ import { useEffect, useState } from "react";
 // used a .env file to hide API key. want to learn some backend
 // to hide the API key from public eyes
 // Learned how to use date input in form
-// Learned how to get current date and learned about epoch time
+// Learned about Date and epoch time and how to format it
+// Learned I could not change 
+
 
 function App() {
-  const currentDate = new Date();
+  let currentDate = new Date();
+  // This gets us the current date, new Date format doesn't match so toISOString gives us the correct date info but with extra info at the end. This splits off the info we need
+  currentDate = currentDate.toISOString().split("T")[0];
 
   const [startDate, setStartDate] = useState("2021-01-01");
-  const [endDate, setEndDate] = useState("");
+  const [endDate, setEndDate] = useState(currentDate);
+  const [submit, setSubmit] = useState(false);
   const [photos, setPhotos] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
   //NASA APOD endpoint URL
   const url = "https://api.nasa.gov/planetary/apod";
+
 
   //Get data from API
   const getNASAData = async () => {
@@ -38,25 +44,73 @@ function App() {
     setPhotos(response.data);
   }
 
+  const startDateHandler = (event) => {
+    setStartDate(event.target.value);
+  }
+
+  const endDateHandler = (event) => {
+    setEndDate(event.target.value);
+  }
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    setSubmit(true);
+  }
+
+  const likeToggle = index => {
+    // Create copy of useState photos
+    const copyOfPhotos = [...photos];
+    // Make copy of photo at index of button clicked
+    const photo = copyOfPhotos[index];
+    // If it is undefined or liked is set to false, add/change it to true
+    if (!photo.liked){
+      photo.liked = true;
+    } else {
+      // If it is true change it to false
+      photo.liked = false;
+    }
+    //reassign changed photo to copy of state photos array
+    copyOfPhotos[index] = photo;
+    //set useState photos to the updated copy which will trigger rerender with updated like button
+    // Styling is changed using ternary class name in DisplayPhotos.js
+    setPhotos(copyOfPhotos);
+  }
   //useEffect to get API data on load
 
   useEffect(() => {
-    getNASAData();
-  }, [])
+    // API call will be made only if the user submitted a date
+    if (submit) {
+      getNASAData();
+    }
+  }, [submit])
 
 
   return (
     <div className="App">
       <header>
-        <h1>See Space</h1>
-        <DateForm />
-        <p className="error">{errorMessage ? errorMessage : null }</p>
+        <div className="wrapper">
+          <h1>See Space</h1>
+          <DateForm
+            startDate={startDate}
+            endDate={endDate}
+            startDateHandler={startDateHandler}
+            endDateHandler={endDateHandler}
+            submitHandler={submitHandler} />
+          <p className="error">{errorMessage ? errorMessage : null}</p>
+        </div>
       </header>
       <main>
-        <DisplayPhotos photos={photos} />
+        <div className="wrapper">
+          <DisplayPhotos
+            photos={photos}
+            likeToggle={likeToggle}
+          />
+        </div>
       </main>
       <footer>
-
+        <div className="wrapper">
+          <p>Made by <a href="https://github.com/Abdul1Abdi" target="_blank">Abdul</a></p>
+        </div>
       </footer>
     </div>
   );

@@ -1,10 +1,11 @@
 /* Imports */
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
 /* General Styles */
 
 html {
   font-size:125%;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 img {
@@ -29,4 +30,41 @@ a {
     max-width: 1200px;
     width: 90%;
     margin: 0 auto;
+}
+
+body {
+  background-color: lavender;
+}
+
+/* Header Styles */
+
+header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-family: "Oswald", sans-serif;
+  font-size: 4rem;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.liked {
+  background-color: red;
+}
+
+/* Footer Styles */
+footer p {
+  font-size: 0.7rem;
+  color: dark;
+  text-align: center;
 }
