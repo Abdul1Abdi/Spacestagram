@@ -1,4 +1,4 @@
-# See Space Site
+# Spacestagram Site
 
 This project displays photos along with their infgormation from the [NASA Astronomy Picture of the Day API](https://api.nasa.gov/#apod). It allows the user to select a span of dates to display the pictures from.
 
