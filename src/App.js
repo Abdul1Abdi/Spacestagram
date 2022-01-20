@@ -4,14 +4,6 @@ import DisplayPhotos from './DisplayPhotos';
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-// Trouble getting data using async await
-// used a .env file to hide API key. want to learn some backend
-// to hide the API key from public eyes
-// Learned how to use date input in form
-// Learned about Date and epoch time and how to format it
-// Learned I could not change 
-
-
 function App() {
   let currentDate = new Date();
   // This gets us the current date, new Date format doesn't match so toISOString gives us the correct date info but with extra info at the end. This splits off the info we need
@@ -89,7 +81,7 @@ function App() {
     <div className="App">
       <header>
         <div className="wrapper">
-          <h1>See Space</h1>
+          <h1>Spacestagram</h1>
           <DateForm
             startDate={startDate}
             endDate={endDate}

@@ -1,5 +1,9 @@
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+
 const DisplayPhotos = ({photos, likeToggle}) => {
+    const heart = <FontAwesomeIcon icon={faHeart} />
     return(
         <ul>
             {
@@ -12,14 +16,17 @@ const DisplayPhotos = ({photos, likeToggle}) => {
                         // Since there is only 1 photo per day the date can serve as a unique ID
                         <li key={photo.date}>
                             <img src={photo.url} alt={`A photo of ${photo.title}`}/>
-                            <h3>{photo.title}</h3>
-                            <p>{photo.explanation}</p>
-                            <div className="buttonAndMetaContainer">
-                                <div className="authorAndDateContainer">
-                                    <p>{photo.copyright}</p>
-                                    <p>{photo.date}</p>
+                            <div className="textContainer">
+                                <h3>{photo.title}</h3>
+                                <p>{photo.explanation}</p>
+                                <div className="buttonAndMetaContainer">
+                                    <div className="authorAndDateContainer">
+                                        <p>{photo.copyright}</p>
+                                        <p>{photo.date}</p>
+                                    </div>
+                                    <button className={likeClass} onClick={() => likeToggle(index)}>Like <span className="heart">{heart}</span></button>
                                 </div>
-                                <button className={ likeClass } onClick={ () => likeToggle(index) }>Like</button>
+
                             </div>
                             
                         </li>
