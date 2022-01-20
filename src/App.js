@@ -19,22 +19,33 @@ function App() {
   const url = "https://api.nasa.gov/planetary/apod";
 
 
-  //Get data from API
-  const getNASAData = async () => {
-    const response = await axios({
-      url: url,
-      method: "GET",
-      dataResponse: "json",
-      params: {
-        start_date: startDate,
-        end_date: endDate,
-        api_key: "ZJR60oMxAe8iWaxaVWxEj4G2hbqa4aO13p5njp1B" 
-      }
-    }).catch(error => {
-      setErrorMessage("Sorry there was an error getting data from the API");
-    })
-    setPhotos(response.data);
-  }
+  //useEffect to get API data on load
+
+  useEffect(() => {
+    //Get data from API
+    const getNASAData = async () => {
+      const response = await axios({
+        url: url,
+        method: "GET",
+        dataResponse: "json",
+        params: {
+          start_date: startDate,
+          end_date: endDate,
+          api_key: "ZJR60oMxAe8iWaxaVWxEj4G2hbqa4aO13p5njp1B"
+        }
+      }).catch(error => {
+        setErrorMessage("Sorry there was an error getting data from the API");
+      })
+      setPhotos(response.data);
+    }
+    // API call will be made only if the user submitted a date
+    if (submit) {
+      getNASAData();
+    }
+  }, [submit])
+
+
+  
 
   const startDateHandler = (event) => {
     setStartDate(event.target.value);
@@ -67,15 +78,6 @@ function App() {
     // Styling is changed using ternary class name in DisplayPhotos.js
     setPhotos(copyOfPhotos);
   }
-  //useEffect to get API data on load
-
-  useEffect(() => {
-    // API call will be made only if the user submitted a date
-    if (submit) {
-      getNASAData();
-    }
-  }, [submit])
-
 
   return (
     <div className="App">
@@ -83,19 +85,19 @@ function App() {
         <div className="wrapper">
           <h1>Spacestagram</h1>
           <DateForm
-            startDate={startDate}
-            endDate={endDate}
-            startDateHandler={startDateHandler}
-            endDateHandler={endDateHandler}
-            submitHandler={submitHandler} />
+            startDate={ startDate }
+            endDate={ endDate }
+            startDateHandler={  startDateHandler }
+            endDateHandler={ endDateHandler }
+            submitHandler={ submitHandler } />
           <p className="error">{errorMessage ? errorMessage : null}</p>
         </div>
       </header>
       <main>
         <div className="wrapper">
           <DisplayPhotos
-            photos={photos}
-            likeToggle={likeToggle}
+            photos={ photos }
+            likeToggle={ likeToggle }
           />
         </div>
       </main>
